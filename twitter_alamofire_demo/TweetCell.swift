@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class TweetCell: UITableViewCell {
     
@@ -22,6 +23,15 @@ class TweetCell: UITableViewCell {
     
     var tweet: Tweet! {
         didSet {
+            if let imgURL = tweet.user.profileImgURL {
+                let url = URL(string: imgURL)
+                profileImage.af_setImage(withURL: url!)
+            }
+            tweetTextLabel.text = tweet.text
+            authorLabel.text = tweet.user.name
+            screennameLabel.text = tweet.user.screenName
+            tweetTimeStampLabel.text = tweet.createdAtString
+            
             refreshData()
         }
     }
@@ -56,8 +66,6 @@ class TweetCell: UITableViewCell {
         } else {
             tweet.retweeted = true
             tweet.retweetCount += 1
-            let button = sender as! UIButton
-            button.setImage(#imageLiteral(resourceName: "retweet-icon-green"), for: UIControlState.normal)
                 APIManager.shared.retweet(tweet) { (tweet: Tweet?, error: Error?) in
                 if let  error = error {
                     print("Error retweet tweet: \(error.localizedDescription)")
@@ -84,8 +92,6 @@ class TweetCell: UITableViewCell {
             } else {
                 tweet.favorited = true
                 tweet.favoriteCount! += 1
-                let button = sender as! UIButton
-                button.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: UIControlState.normal)
                 APIManager.shared.favorite(tweet) { (tweet: Tweet?, error: Error?) in
                     if let  error = error {
                         print("Error favoriting tweet: \(error.localizedDescription)")
@@ -94,16 +100,14 @@ class TweetCell: UITableViewCell {
                     }
                 }
             }
+            
+            refreshData()
         }
         
-        refreshData()
+        
     }
     
     func refreshData() {
-        tweetTextLabel.text = tweet.text
-        authorLabel.text = tweet.user.name
-        screennameLabel.text = tweet.user.screenName
-        tweetTimeStampLabel.text = tweet.createdAtString
         retweetCountLabel.text = String(describing: tweet.retweetCount)
         if tweet.favoriteCount != nil {
             favoriteCountLabel.text = String(describing: tweet.favoriteCount!)
@@ -120,7 +124,6 @@ class TweetCell: UITableViewCell {
         } else {
             retweetBtn.setImage(#imageLiteral(resourceName: "retweet-icon"), for: .normal)
         }
-
     }
     
 }
