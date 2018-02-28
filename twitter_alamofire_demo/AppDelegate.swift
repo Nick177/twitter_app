@@ -26,12 +26,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         
-       /* if User.current != nil {
+        if User.current != nil {
+            print(User.current!.name)
+          
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             // view controller currently being set in Storyboard as default will be overridden
-            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "TimelineViewController")
+            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
+ 
         }
-         */
+ 
         return true
     }
     

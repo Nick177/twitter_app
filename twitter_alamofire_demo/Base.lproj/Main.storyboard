@@ -75,7 +75,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="167"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U1g-kw-izy" id="zd2-Er-659">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="167"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="166.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I love tweeting! I love tweeting! " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epC-Fs-Q5Z">
@@ -157,15 +157,16 @@
                                                 <constraint firstItem="MUj-QE-eAM" firstAttribute="leading" secondItem="R86-aP-lth" secondAttribute="trailing" constant="8" id="obP-yG-YZb"/>
                                                 <constraint firstAttribute="trailing" secondItem="epC-Fs-Q5Z" secondAttribute="trailing" constant="8" id="pp4-qF-LIh"/>
                                                 <constraint firstItem="bwJ-2T-BYP" firstAttribute="leading" secondItem="Jo3-kw-aam" secondAttribute="trailing" constant="8" id="tEn-1t-qaB"/>
-                                                <constraint firstItem="kKz-oP-Yoj" firstAttribute="centerX" secondItem="MUj-QE-eAM" secondAttribute="centerX" id="wiY-NM-ACk"/>
                                                 <constraint firstItem="kKz-oP-Yoj" firstAttribute="leading" secondItem="bwJ-2T-BYP" secondAttribute="trailing" constant="46" id="x3t-n6-tfC"/>
                                                 <constraint firstItem="R86-aP-lth" firstAttribute="leading" secondItem="dL7-GV-0Lv" secondAttribute="trailing" constant="8" id="y6W-WK-BID"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="authorLabel" destination="R86-aP-lth" id="0g0-Pe-qS6"/>
+                                            <outlet property="favoriteBtn" destination="kKz-oP-Yoj" id="vz9-vK-xCl"/>
                                             <outlet property="favoriteCountLabel" destination="dBe-As-NbO" id="d5Z-qO-Y7v"/>
                                             <outlet property="profileImage" destination="dL7-GV-0Lv" id="ASh-hY-2zq"/>
+                                            <outlet property="retweetBtn" destination="Jo3-kw-aam" id="PJp-P0-egT"/>
                                             <outlet property="retweetCountLabel" destination="bwJ-2T-BYP" id="z47-WQ-6at"/>
                                             <outlet property="screennameLabel" destination="MUj-QE-eAM" id="NZR-io-GTQ"/>
                                             <outlet property="tweetTextLabel" destination="epC-Fs-Q5Z" id="ZLP-IG-Wsf"/>
