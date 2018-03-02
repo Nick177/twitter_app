@@ -8,6 +8,7 @@
 
 import UIKit
 import AlamofireImage
+import DateToolsSwift
 
 class TweetCell: UITableViewCell {
     
@@ -30,7 +31,7 @@ class TweetCell: UITableViewCell {
             tweetTextLabel.text = tweet.text
             authorLabel.text = tweet.user.name
             screennameLabel.text = tweet.user.screenName
-            tweetTimeStampLabel.text = tweet.createdAtString
+            tweetTimeStampLabel.text = getTimeStamp(createdAt: tweet.createdAtString)
             
             refreshData()
         }
@@ -124,6 +125,38 @@ class TweetCell: UITableViewCell {
         } else {
             retweetBtn.setImage(#imageLiteral(resourceName: "retweet-icon"), for: .normal)
         }
+    }
+    
+    func getTimeStamp(createdAt: String) -> String {
+        //return createdAt
+        let formatter = DateFormatter()
+        // Configure the input format to parse the date string
+        formatter.dateFormat = "E MMM d HH:mm:ss Z y"
+        // Convert String to Date
+        let createdDate = formatter.date(from: createdAt)!
+        // Configure output format
+        formatter.dateStyle = .short
+        formatter.timeStyle = .none
+        
+        let today = Date()
+        
+        let diff = today .seconds(from: createdDate)
+        
+        if (diff < 60) {
+            return "\(diff)s"
+        } else if (diff < 3600) {
+            return "\(diff / 60)m"
+        } else if (diff < 86400) {
+            return "\(diff / 60 / 60)h"
+        } else if (diff < 604800) {
+            return "\(diff / 60 / 60 / 60)d"
+        } else {
+            
+            // Convert Date to String
+            let createdString = formatter.string(from: createdDate)
+            return createdString
+        }
+        
     }
     
 }
