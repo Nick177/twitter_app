@@ -14,7 +14,7 @@ enum TweetConstants {
     static let space = " "
 }
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var backgroundImgView: UIImageView!
     
     @IBOutlet weak var profileImgView: UIImageView!
@@ -27,6 +27,9 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var followersLabel: UILabel!
     
     var user: User!
+    var tweets: [Tweet] = []
+    
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,11 +67,43 @@ class ProfileViewController: UIViewController {
             followersLabel.attributedText = followersAttributedString
         }
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        fetchUserTimeline()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    func fetchUserTimeline() {
+        APIManager.shared.getUserTimeLine { (tweets, error) in
+            if let tweets = tweets {
+                self.tweets = tweets
+                self.tableView.reloadData()
+//                self.refreshControl.endRefreshing()
+            } else if let error = error {
+                print("Error getting home timeline: " + error.localizedDescription)
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tweets.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
+        
+        cell.tweet = tweets[indexPath.row]
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }
