@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, ImageSegueProtocol {
     
     var tweets: [Tweet] = []
     
@@ -57,6 +57,8 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         
         cell.tweet = tweets[indexPath.row]
+        cell.delegate = self
+        cell.row = indexPath.row
         
         return cell
     }
@@ -94,14 +96,25 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "tweetCellSegue" {
+            let cell = sender as! UITableViewCell
+            if let indexPath = tableView.indexPath(for: cell) {
+                let tweet = tweets[indexPath.row]
+                let detailsViewController = segue.destination as! DetailsViewController
+                detailsViewController.tweet = tweet
+            }
+        } else if segue.identifier == "timelineToProfileSegue" {
+            let row = sender as! Int
+            let tweet = tweets[row]
+            let profileVC = segue.destination as! ProfileViewController
+            profileVC.user = tweet.user
+        }
+
+    }
+    
+    func imageTapped(row: Int) {
+        performSegue(withIdentifier: "timelineToProfileSegue", sender: row)
+    }
     
 }

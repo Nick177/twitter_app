@@ -12,6 +12,8 @@ enum TweetConstants {
     static let following_label = "FOLLOWING"
     static let followers_label = "FOLLOWERS"
     static let space = " "
+    static let retweets_label = "RETWEETS"
+    static let favorite_label = "FAVORITES"
 }
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -34,7 +36,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        user = User.current
+        if user == nil {
+            user = User.current
+        }
         
         nameLabel.text = user?.name
         screenNameLabel.text = user?.screenName
@@ -79,7 +83,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     func fetchUserTimeline() {
-        APIManager.shared.getUserTimeLine { (tweets, error) in
+        APIManager.shared.getUserTimeLine(user: user, completion:{ (tweets, error) in
             if let tweets = tweets {
                 self.tweets = tweets
                 self.tableView.reloadData()
@@ -87,7 +91,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             } else if let error = error {
                 print("Error getting home timeline: " + error.localizedDescription)
             }
-        }
+        })
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -104,6 +108,18 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "tweetCellSegue" {
+            let cell = sender as! UITableViewCell
+            if let indexPath = tableView.indexPath(for: cell) {
+                let tweet = tweets[indexPath.row]
+                let detailsViewController = segue.destination as! DetailsViewController
+                detailsViewController.tweet = tweet
+            }
+        }
+        
     }
 
 }

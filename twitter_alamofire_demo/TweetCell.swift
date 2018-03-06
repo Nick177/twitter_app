@@ -10,6 +10,10 @@ import UIKit
 import AlamofireImage
 import DateToolsSwift
 
+protocol ImageSegueProtocol: class {
+    func imageTapped(row: Int)
+}
+
 class TweetCell: UITableViewCell {
     
     @IBOutlet weak var profileImage: UIImageView!
@@ -27,15 +31,25 @@ class TweetCell: UITableViewCell {
             if let imgURL = tweet.user.profileImgURL {
                 let url = URL(string: imgURL)
                 profileImage.af_setImage(withURL: url!)
+                
+                let profileImgTapGesture = UITapGestureRecognizer(target: self, action: #selector(profileImgViewTapped(gesture:)))
+                
+                profileImage.addGestureRecognizer(profileImgTapGesture)
+                profileImage.isUserInteractionEnabled = true
             }
             tweetTextLabel.text = tweet.text
             authorLabel.text = tweet.user.name
             screennameLabel.text = tweet.user.screenName
             tweetTimeStampLabel.text = getTimeStamp(createdAt: tweet.createdAtString)
+
+            
             
             refreshData()
         }
     }
+    
+    weak var delegate: ImageSegueProtocol?
+    var row: Int?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -105,7 +119,14 @@ class TweetCell: UITableViewCell {
             refreshData()
         }
         
-        
+    }
+    
+    func profileImgViewTapped(gesture: UIGestureRecognizer) {
+        if (gesture.view as? UIImageView) != nil
+        {
+            guard let row = row else { return }
+            delegate?.imageTapped(row: row)
+        }
     }
     
     func refreshData() {

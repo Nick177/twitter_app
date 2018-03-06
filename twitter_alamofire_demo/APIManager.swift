@@ -119,11 +119,11 @@ class APIManager: SessionManager {
     
     // get user timeline
     
-    func getUserTimeLine(completion: @escaping ([Tweet]?, Error?) -> ()) {
+    func getUserTimeLine(user: User, completion: @escaping ([Tweet]?, Error?) -> ()) {
         
         // This uses tweets from disk to avoid hitting rate limit. Comment out if you want fresh
         // tweets,
-        if let data = UserDefaults.standard.object(forKey: "user_tweets") as? Data {
+        /*if let data = UserDefaults.standard.object(forKey: "user_tweets") as? Data {
             let tweetDictionaries = NSKeyedUnarchiver.unarchiveObject(with: data) as! [[String: Any]]
             let tweets = tweetDictionaries.flatMap({ (dictionary) -> Tweet in
                 Tweet(dictionary: dictionary)
@@ -131,8 +131,9 @@ class APIManager: SessionManager {
             
             completion(tweets, nil)
             return
-        }
-        request(URL(string: "https://api.twitter.com/1.1/statuses/user_timeline.json")!, method: .get)
+        }*/
+        let parameters = ["user_id": user.id]
+        request(URL(string: "https://api.twitter.com/1.1/statuses/user_timeline.json")!, method: .get, parameters: parameters, encoding: URLEncoding.queryString)
             .validate()
             .responseJSON { (response) in
                 switch response.result {

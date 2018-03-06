@@ -173,7 +173,7 @@
                                             <outlet property="screennameLabel" destination="MUj-QE-eAM" id="NZR-io-GTQ"/>
                                             <outlet property="tweetTextLabel" destination="epC-Fs-Q5Z" id="ZLP-IG-Wsf"/>
                                             <outlet property="tweetTimeStampLabel" destination="O1G-Ts-msT" id="fkd-cH-pNI"/>
-                                            <segue destination="9CK-w3-hcI" kind="show" id="g6p-WI-Eub"/>
+                                            <segue destination="9CK-w3-hcI" kind="show" identifier="tweetCellSegue" id="g6p-WI-Eub"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -188,16 +188,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home Timeline" id="9Zi-uW-GTS">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="AtI-Ca-RIh">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="M4I-bY-65d">
-                                <rect key="frame" x="16" y="7" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="AO7-bu-vN8" kind="show" id="x3Y-ur-L0c"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="hz2-ji-ft0">
                             <connections>
                                 <action selector="didTapLogout:" destination="5YO-Vh-39k" id="fM7-h5-mq1"/>
@@ -206,6 +196,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Ctl-bI-Eag" id="igH-cX-XMH"/>
+                        <segue destination="AO7-bu-vN8" kind="show" identifier="timelineToProfileSegue" id="qMw-Qv-nSq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZlF-i2-Ves" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -410,7 +401,7 @@
                                             <outlet property="screennameLabel" destination="bJu-xM-dti" id="ctl-NW-C4h"/>
                                             <outlet property="tweetTextLabel" destination="gz4-jl-hKI" id="CXk-o2-hcO"/>
                                             <outlet property="tweetTimeStampLabel" destination="9o6-wA-kcL" id="L19-sX-iqf"/>
-                                            <segue destination="9CK-w3-hcI" kind="show" id="UD8-tn-w77"/>
+                                            <segue destination="9CK-w3-hcI" kind="show" identifier="tweetCellSegue" id="UD8-tn-w77"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -533,14 +524,14 @@
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="retweet-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Te3-Nq-EZc">
-                                <rect key="frame" x="79" y="232" width="35" height="35"/>
+                                <rect key="frame" x="91" y="232" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="7rG-Ww-7Ll"/>
                                     <constraint firstAttribute="height" constant="35" id="rwS-gh-FUr"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favor-icon" translatesAutoresizingMaskIntoConstraints="NO" id="8qU-na-phP">
-                                <rect key="frame" x="150" y="232" width="35" height="35"/>
+                                <rect key="frame" x="174" y="232" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="18z-do-uKF"/>
                                     <constraint firstAttribute="height" constant="35" id="t22-WA-Fa5"/>
@@ -571,7 +562,7 @@
                             <constraint firstItem="Ic8-A3-iOm" firstAttribute="top" secondItem="zVu-hg-as4" secondAttribute="bottom" constant="8" id="9CN-qE-ICS"/>
                             <constraint firstItem="HgH-S5-lVE" firstAttribute="leading" secondItem="d0m-Bi-nxj" secondAttribute="leading" id="Byx-fb-okQ"/>
                             <constraint firstItem="WtC-k1-H8m" firstAttribute="leading" secondItem="1aO-J3-pgn" secondAttribute="leading" id="DKw-7A-6eJ"/>
-                            <constraint firstItem="8qU-na-phP" firstAttribute="leading" secondItem="Te3-Nq-EZc" secondAttribute="trailing" constant="36" id="GEU-fl-Vqr"/>
+                            <constraint firstItem="8qU-na-phP" firstAttribute="leading" secondItem="Te3-Nq-EZc" secondAttribute="trailing" constant="48" id="GEU-fl-Vqr"/>
                             <constraint firstItem="1aO-J3-pgn" firstAttribute="top" secondItem="ytL-1t-g4f" secondAttribute="bottom" constant="8" id="GNN-eX-OMi"/>
                             <constraint firstItem="ytL-1t-g4f" firstAttribute="leading" secondItem="Ic8-A3-iOm" secondAttribute="leading" id="KpC-Ga-IQx"/>
                             <constraint firstAttribute="trailing" secondItem="1aO-J3-pgn" secondAttribute="trailing" constant="8" id="TbT-X6-mcc"/>
@@ -590,13 +581,26 @@
                             <constraint firstItem="lxG-3m-I18" firstAttribute="centerY" secondItem="1Oc-XZ-kgr" secondAttribute="centerY" id="pna-dx-K3E"/>
                             <constraint firstItem="d0m-Bi-nxj" firstAttribute="leading" secondItem="zVu-hg-as4" secondAttribute="trailing" constant="8" id="qQe-C4-TN5"/>
                             <constraint firstItem="HgH-S5-lVE" firstAttribute="top" secondItem="d0m-Bi-nxj" secondAttribute="bottom" constant="8" id="ufk-dI-Rau"/>
-                            <constraint firstItem="Te3-Nq-EZc" firstAttribute="leading" secondItem="WtC-k1-H8m" secondAttribute="trailing" constant="36" id="yG6-0x-IIZ"/>
+                            <constraint firstItem="Te3-Nq-EZc" firstAttribute="leading" secondItem="WtC-k1-H8m" secondAttribute="trailing" constant="48" id="yG6-0x-IIZ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="Ic8-A3-iOm" id="diT-xg-7wI"/>
+                        <outlet property="favoriteCountLabel" destination="lxG-3m-I18" id="sdc-1J-OgS"/>
+                        <outlet property="favoriteImageView" destination="8qU-na-phP" id="kch-Vg-W0v"/>
+                        <outlet property="profileImageView" destination="zVu-hg-as4" id="dlK-YD-J7G"/>
+                        <outlet property="replyImageView" destination="WtC-k1-H8m" id="UeV-c9-u9G"/>
+                        <outlet property="retweetCountLabel" destination="1Oc-XZ-kgr" id="Y37-bY-PmV"/>
+                        <outlet property="retweetImageView" destination="Te3-Nq-EZc" id="Fok-mi-mEO"/>
+                        <outlet property="screenNameLabel" destination="HgH-S5-lVE" id="znG-7G-yTE"/>
+                        <outlet property="timeStampLabel" destination="ytL-1t-g4f" id="G8z-c3-FdZ"/>
+                        <outlet property="usernameLabel" destination="d0m-Bi-nxj" id="4ol-MV-4te"/>
+                        <segue destination="AO7-bu-vN8" kind="show" identifier="detailToProfileSegue" id="t8I-UW-2Ce"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v6l-A1-MQs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3200.8000000000002" y="870.31484257871068"/>
+            <point key="canvasLocation" x="2977" y="859"/>
         </scene>
         <!--Profile-->
         <scene sceneID="qAw-WE-y7l">
@@ -627,7 +631,7 @@
         <image name="retweet-icon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UD8-tn-w77"/>
-        <segue reference="x3Y-ur-L0c"/>
+        <segue reference="g6p-WI-Eub"/>
+        <segue reference="qMw-Qv-nSq"/>
     </inferredMetricsTieBreakers>
 </document>
