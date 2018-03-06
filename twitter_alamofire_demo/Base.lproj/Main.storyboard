@@ -285,7 +285,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="750 Following" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQu-ML-hzS">
-                                <rect key="frame" x="16" y="283.5" width="81.5" height="14.5"/>
+                                <rect key="frame" x="16" y="283.5" width="163.5" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -439,7 +439,7 @@
                             <constraint firstItem="gzD-Ed-fec" firstAttribute="leading" secondItem="ROE-en-JAQ" secondAttribute="leading" id="VzM-Kw-xsk"/>
                             <constraint firstItem="5NR-tr-cJJ" firstAttribute="leading" secondItem="RxE-6I-XAW" secondAttribute="leading" constant="8" id="WbZ-J1-tZg"/>
                             <constraint firstAttribute="trailing" secondItem="hEm-dh-Fqb" secondAttribute="trailing" id="Zew-Ia-AzK"/>
-                            <constraint firstItem="cHk-yc-gKF" firstAttribute="leading" secondItem="xQu-ML-hzS" secondAttribute="trailing" constant="90" id="ckS-qV-A93"/>
+                            <constraint firstItem="cHk-yc-gKF" firstAttribute="leading" secondItem="xQu-ML-hzS" secondAttribute="trailing" constant="8" id="ckS-qV-A93"/>
                             <constraint firstItem="hEm-dh-Fqb" firstAttribute="top" secondItem="OQi-7m-b4M" secondAttribute="bottom" id="dWc-m1-cSu"/>
                             <constraint firstAttribute="bottom" secondItem="5NR-tr-cJJ" secondAttribute="bottom" id="fm4-GT-AJW"/>
                             <constraint firstItem="cHk-yc-gKF" firstAttribute="top" secondItem="gzD-Ed-fec" secondAttribute="bottom" constant="8" id="h0z-Ky-heN"/>
