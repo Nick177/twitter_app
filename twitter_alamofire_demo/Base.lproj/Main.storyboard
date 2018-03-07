@@ -203,6 +203,24 @@
             </objects>
             <point key="canvasLocation" x="3780" y="36.431784107946029"/>
         </scene>
+        <!--Compose View Controller-->
+        <scene sceneID="sqa-GH-L34">
+            <objects>
+                <viewController id="0qi-vA-pJ0" customClass="ComposeViewController" customModule="twitter_alamofire_demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iZE-Gb-ILY"/>
+                        <viewControllerLayoutGuide type="bottom" id="hua-p2-dDm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DxN-7E-7NF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FdB-0K-4sm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5065" y="864"/>
+        </scene>
         <!--Tweet-->
         <scene sceneID="WXZ-z8-8LI">
             <objects>
@@ -271,7 +289,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a tagline or something" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzD-Ed-fec">
-                                <rect key="frame" x="16" y="258" width="249" height="18"/>
+                                <rect key="frame" x="16" y="258" width="343" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -283,7 +301,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@iHaveNotBeenTerminated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sRW-dx-qYd">
-                                <rect key="frame" x="16" y="234" width="235" height="16"/>
+                                <rect key="frame" x="16" y="234" width="343" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.41985073389999999" green="0.41198079319999997" blue="0.41422970100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -425,7 +443,7 @@
                             <constraint firstItem="cHk-yc-gKF" firstAttribute="leading" secondItem="RxE-6I-XAW" secondAttribute="centerX" id="FIP-2c-Bb7"/>
                             <constraint firstItem="5NR-tr-cJJ" firstAttribute="top" secondItem="zO5-zX-nOP" secondAttribute="bottom" constant="16" id="G9Q-xC-EBp"/>
                             <constraint firstItem="zO5-zX-nOP" firstAttribute="leading" secondItem="RxE-6I-XAW" secondAttribute="leading" constant="16" id="PUG-rM-Z1P"/>
-                            <constraint firstAttribute="trailing" secondItem="gzD-Ed-fec" secondAttribute="trailing" constant="110" id="QRe-pq-vIV"/>
+                            <constraint firstAttribute="trailing" secondItem="gzD-Ed-fec" secondAttribute="trailing" constant="16" id="QRe-pq-vIV"/>
                             <constraint firstItem="ROE-en-JAQ" firstAttribute="centerY" secondItem="hEm-dh-Fqb" secondAttribute="bottom" id="RYd-DJ-TUt"/>
                             <constraint firstItem="hEm-dh-Fqb" firstAttribute="height" secondItem="RxE-6I-XAW" secondAttribute="height" multiplier="1:6" id="VGI-Cg-hKY"/>
                             <constraint firstItem="TJf-rc-3N6" firstAttribute="leading" secondItem="ROE-en-JAQ" secondAttribute="leading" id="Vdb-3P-skn"/>
@@ -440,7 +458,7 @@
                             <constraint firstItem="sRW-dx-qYd" firstAttribute="top" secondItem="TJf-rc-3N6" secondAttribute="bottom" constant="8" id="iIi-uB-H5g"/>
                             <constraint firstItem="sRW-dx-qYd" firstAttribute="leading" secondItem="ROE-en-JAQ" secondAttribute="leading" id="kC0-km-oyt"/>
                             <constraint firstAttribute="trailing" secondItem="cHk-yc-gKF" secondAttribute="trailing" constant="16" id="oc9-Nb-bq6"/>
-                            <constraint firstAttribute="trailing" secondItem="sRW-dx-qYd" secondAttribute="trailing" constant="124" id="sFI-3Q-0Ih"/>
+                            <constraint firstAttribute="trailing" secondItem="sRW-dx-qYd" secondAttribute="trailing" constant="16" id="sFI-3Q-0Ih"/>
                             <constraint firstItem="gzD-Ed-fec" firstAttribute="top" secondItem="sRW-dx-qYd" secondAttribute="bottom" constant="8" id="tUO-Fb-Ioe"/>
                             <constraint firstItem="cHk-yc-gKF" firstAttribute="centerY" secondItem="xQu-ML-hzS" secondAttribute="centerY" id="vLR-32-JIA"/>
                         </constraints>
@@ -631,7 +649,7 @@
         <image name="retweet-icon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="g6p-WI-Eub"/>
+        <segue reference="UD8-tn-w77"/>
         <segue reference="qMw-Qv-nSq"/>
     </inferredMetricsTieBreakers>
 </document>
