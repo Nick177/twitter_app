@@ -52,6 +52,9 @@ class User {
         id = dictionary["id"] as! Int64
         name = dictionary["name"] as! String
         screenName = dictionary["screen_name"] as? String
+        if screenName != nil {
+            screenName = "@" + screenName!
+        }
         profileImgURL = dictionary["profile_image_url_https"] as? String
         profileBackgroundImgURL = (dictionary["profile_use_background_image"] as! Bool) ? (dictionary["profile_background_image_url_https"] as? String) : nil
         description = dictionary["description"] as? String

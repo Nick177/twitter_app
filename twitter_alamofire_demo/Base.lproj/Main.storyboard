@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17D2047" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -76,7 +76,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="167"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U1g-kw-izy" id="zd2-Er-659">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="166.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="167"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I love tweeting! I love tweeting! " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epC-Fs-Q5Z">
@@ -303,7 +303,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FdB-0K-4sm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4656.8000000000002" y="534.78260869565224"/>
+            <point key="canvasLocation" x="4718" y="410"/>
         </scene>
         <!--Tweet-->
         <scene sceneID="WXZ-z8-8LI">
@@ -406,7 +406,7 @@
                                         <rect key="frame" x="0.0" y="28" width="359" height="168"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tWL-uQ-htD" id="WJv-TM-sq4">
-                                            <rect key="frame" x="0.0" y="0.0" width="359" height="167.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="359" height="168"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I love tweeting! I love tweeting! " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gz4-jl-hKI">
@@ -698,11 +698,70 @@
                         <outlet property="timeStampLabel" destination="ytL-1t-g4f" id="G8z-c3-FdZ"/>
                         <outlet property="usernameLabel" destination="d0m-Bi-nxj" id="4ol-MV-4te"/>
                         <segue destination="AO7-bu-vN8" kind="show" identifier="detailToProfileSegue" id="t8I-UW-2Ce"/>
+                        <segue destination="Ixl-yF-mFo" kind="show" identifier="detailToReplySegue" id="WgD-0n-H7g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v6l-A1-MQs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2977" y="859"/>
+        </scene>
+        <!--Reply View Controller-->
+        <scene sceneID="WEF-ey-gvh">
+            <objects>
+                <viewController id="Ixl-yF-mFo" customClass="ReplyViewController" customModule="twitter_alamofire_demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mDM-3C-ohG"/>
+                        <viewControllerLayoutGuide type="bottom" id="0Pq-UZ-1OX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EfI-iw-yyv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Replying to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beh-Ah-lZh">
+                                <rect key="frame" x="66" y="89" width="301" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Tweet your reply" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Xlz-2l-a83">
+                                <rect key="frame" x="8" y="130" width="359" height="485"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oWK-5Y-nFG">
+                                <rect key="frame" x="8" y="72" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="0yO-57-S5j"/>
+                                    <constraint firstAttribute="width" constant="50" id="R0z-Ww-hCU"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="oWK-5Y-nFG" firstAttribute="leading" secondItem="EfI-iw-yyv" secondAttribute="leading" constant="8" id="AQm-Di-Cz5"/>
+                            <constraint firstItem="0Pq-UZ-1OX" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Xlz-2l-a83" secondAttribute="bottom" constant="8" id="Dz4-lP-AZs"/>
+                            <constraint firstItem="0Pq-UZ-1OX" firstAttribute="top" secondItem="Xlz-2l-a83" secondAttribute="bottom" constant="8" symbolic="YES" id="LF2-Yi-OCR"/>
+                            <constraint firstAttribute="trailing" secondItem="beh-Ah-lZh" secondAttribute="trailing" constant="8" id="MNv-2z-5FZ"/>
+                            <constraint firstItem="Xlz-2l-a83" firstAttribute="leading" secondItem="EfI-iw-yyv" secondAttribute="leading" constant="8" id="R9D-Pj-GlT"/>
+                            <constraint firstItem="oWK-5Y-nFG" firstAttribute="top" secondItem="mDM-3C-ohG" secondAttribute="bottom" constant="8" id="RjD-iq-Nai"/>
+                            <constraint firstItem="beh-Ah-lZh" firstAttribute="centerY" secondItem="oWK-5Y-nFG" secondAttribute="centerY" id="fKd-jl-Ka8"/>
+                            <constraint firstItem="Xlz-2l-a83" firstAttribute="top" secondItem="oWK-5Y-nFG" secondAttribute="bottom" constant="8" symbolic="YES" id="ghL-8S-PAh"/>
+                            <constraint firstItem="beh-Ah-lZh" firstAttribute="leading" secondItem="oWK-5Y-nFG" secondAttribute="trailing" constant="8" id="lGP-RI-wPU"/>
+                            <constraint firstAttribute="trailing" secondItem="Xlz-2l-a83" secondAttribute="trailing" constant="8" id="tOi-LW-JxB"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="profileImageView" destination="oWK-5Y-nFG" id="qsV-4o-TxY"/>
+                        <outlet property="screenNameLabel" destination="beh-Ah-lZh" id="AHj-fK-iZV"/>
+                        <outlet property="tweetTextField" destination="Xlz-2l-a83" id="7FW-Bh-S2u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="deu-nP-xZ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3925.5999999999999" y="858.62068965517244"/>
         </scene>
         <!--Profile-->
         <scene sceneID="qAw-WE-y7l">
@@ -735,6 +794,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="g6p-WI-Eub"/>
-        <segue reference="qMw-Qv-nSq"/>
+        <segue reference="t8I-UW-2Ce"/>
     </inferredMetricsTieBreakers>
 </document>

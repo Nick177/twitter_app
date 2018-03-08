@@ -230,6 +230,18 @@ class APIManager: SessionManager {
     func composeTweet(with text: String, completion: @escaping (Tweet?, Error?) -> ()) {
         let urlString = "https://api.twitter.com/1.1/statuses/update.json"
         let parameters = ["status": text]
+        postTweet(urlString: urlString, parameters: parameters, completion: completion)
+    }
+    
+    // Reply to tweet
+    
+    func composeReply(with text: String, recipient_id: String, completion: @escaping (Tweet?, Error?) -> ()) {
+        let urlString = "https://api.twitter.com/1.1/statuses/update.json"
+        let parameters = ["status": text, "in_reply_to_status_id": recipient_id]
+        postTweet(urlString: urlString, parameters: parameters, completion: completion)
+    }
+    
+    private func postTweet(urlString: String, parameters: [String : Any], completion: @escaping (Tweet?, Error?) -> ()) {
         oauthManager.client.post(urlString, parameters: parameters, headers: nil, body: nil, success: { (response: OAuthSwiftResponse) in
             let tweetDictionary = try! response.jsonObject() as! [String: Any]
             let tweet = Tweet(dictionary: tweetDictionary)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailsViewController: UIViewController {
+class DetailsViewController: UIViewController, ReplyViewControllerDelegate {
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -136,6 +136,7 @@ class DetailsViewController: UIViewController {
         if (gesture.view as? UIImageView) != nil
         {
             //perform segue manually
+            performSegue(withIdentifier: "detailToReplySegue", sender: self)
         }
     }
     
@@ -180,7 +181,17 @@ class DetailsViewController: UIViewController {
             let tweet = vc.tweet
             let profileVC = segue.destination as! ProfileViewController
             profileVC.user = tweet?.user
+        } else if segue.identifier == "detailToReplySegue" {
+            let vc = sender as! DetailsViewController
+            let replyVC = segue.destination as! ReplyViewController
+            replyVC.recipientScreenName = tweet.user.screenName
+            replyVC.delegate = self
         }
+    }
+    
+    func did(post: Tweet) {
+        print("posted")
+        self.navigationController?.popToViewController(self, animated: true)
     }
 
 }

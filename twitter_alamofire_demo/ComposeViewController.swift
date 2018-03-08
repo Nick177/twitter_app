@@ -43,7 +43,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         
         characterCountLabel.text = "\(characterLimit)"
         
-        //self.navigationController?.navigationItem.backBarButtonItem?.image = #imageLiteral(resourceName: "close-icon")
     }
     
     override func viewWillAppear(_ animated: Bool) {

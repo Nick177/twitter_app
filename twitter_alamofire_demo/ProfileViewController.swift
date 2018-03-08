@@ -49,16 +49,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         if user.profileBackgroundImgURL != nil { let backgroundURL = URL(string: user.profileBackgroundImgURL!)
         backgroundImgView.af_setImage(withURL: backgroundURL!)
         }
-        print(user.followers_cnt!)
-        print(user.following_cnt!)
         if user.following_cnt != nil {
-        let attrs = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: followingLabel.font.pointSize)]
-        let attributedString = NSMutableAttributedString(string: String(describing: user.following_cnt!) + TweetConstants.space, attributes:attrs)
+            let attrs = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: followingLabel.font.pointSize)]
+            let attributedString = NSMutableAttributedString(string: String(describing: user.following_cnt!) + TweetConstants.space, attributes:attrs)
         attributedString.append(NSMutableAttributedString(string: TweetConstants.following_label))
         
-        followingLabel.text = String(describing: user.following_cnt!) + TweetConstants.space
-        followingLabel.text = followingLabel.text! + TweetConstants.following_label
-        followingLabel.attributedText = attributedString
+            followingLabel.text = String(describing: user.following_cnt!) + TweetConstants.space
+            followingLabel.text = followingLabel.text! + TweetConstants.following_label
+            followingLabel.attributedText = attributedString
         }
         
         if user.followers_cnt != nil {
