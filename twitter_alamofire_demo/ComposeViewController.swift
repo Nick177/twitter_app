@@ -7,13 +7,32 @@
 //
 
 import UIKit
+import AlamofireImage
+//import RSKPlaceholderTextField
+
+protocol ComposeViewControllerDelegate: class {
+    func did(post: Tweet)
+}
 
 class ComposeViewController: UIViewController {
+    @IBOutlet weak var profileImageView: UIImageView!
 
+    @IBOutlet weak var tweetTextField: UITextField!
+    @IBOutlet weak var tweetBtn: UIButton!
+    @IBOutlet weak var screenNameLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    weak var delegate: ComposeViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        let user = User.current!
+        tweetBtn.layer.cornerRadius = 10
+        let url = URL(string: user.profileImgURL!)
+        profileImageView.af_setImage(withURL: url!)
+        nameLabel.text = user.name
+        screenNameLabel.text = user.screenName!
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,15 +40,18 @@ class ComposeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func didTapPost(_ sender: Any) {
+        print("hello")
+        if tweetTextField.text != nil {
+            APIManager.shared.composeTweet(with: tweetTextField.text!) { (tweet, error) in
+                if let error = error {
+                    print("Error composing Tweet: \(error.localizedDescription)")
+                } else if let tweet = tweet {
+                    self.delegate?.did(post: tweet)
+                    print("Compose Tweet Success!")
+                }
+            }
+        }
     }
-    */
 
 }
