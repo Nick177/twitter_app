@@ -29,7 +29,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         
         refreshControl.addTarget(self, action: #selector(TimelineViewController.didPullToRefresh(_:)), for: .valueChanged)
         
-        tableView.insertSubview(refreshControl, at: 0)        
+        tableView.insertSubview(refreshControl, at: 0)
         fetchTimeline()
     }
     
@@ -121,10 +121,14 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         performSegue(withIdentifier: "timelineToProfileSegue", sender: row)
     }
     
+    @IBAction func didTapCompose(_ sender: Any) {
+        performSegue(withIdentifier: "timelineToComposeSegue", sender: self)
+    }
     
     func did(post: Tweet) {
-        print(post)
-        tableView.reloadData()
+        //print(post)
+        self.navigationController?.popToViewController(self, animated: true)
+        self.tableView.reloadData()
     }
     
 }

@@ -194,7 +194,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="edit-icon"/>
                                 <connections>
-                                    <segue destination="0qi-vA-pJ0" kind="modal" identifier="timelineToComposeSegue" id="dIB-tb-YyC"/>
+                                    <action selector="didTapCompose:" destination="5YO-Vh-39k" eventType="touchUpInside" id="nl4-fU-7lW"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -207,6 +207,7 @@
                     <connections>
                         <outlet property="tableView" destination="Ctl-bI-Eag" id="igH-cX-XMH"/>
                         <segue destination="AO7-bu-vN8" kind="show" identifier="timelineToProfileSegue" id="qMw-Qv-nSq"/>
+                        <segue destination="0qi-vA-pJ0" kind="show" identifier="timelineToComposeSegue" id="twu-dp-TLY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZlF-i2-Ves" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -279,6 +280,7 @@
                             <constraint firstAttribute="trailing" secondItem="5xq-jP-xSp" secondAttribute="trailing" constant="8" id="r9a-cc-4Ev"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="jIH-Zx-r40"/>
                     <connections>
                         <outlet property="nameLabel" destination="6ac-6D-bdu" id="cTn-X7-psj"/>
                         <outlet property="profileImageView" destination="GTA-XU-39J" id="PPt-Yj-kEO"/>
