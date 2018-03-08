@@ -42,6 +42,17 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         tweetTextField.layer.cornerRadius = 5.0
         
         characterCountLabel.text = "\(characterLimit)"
+        
+        //self.navigationController?.navigationItem.backBarButtonItem?.image = #imageLiteral(resourceName: "close-icon")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let barButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "close-icon"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(goBack))
+        self.navigationItem.setLeftBarButton(barButtonItem, animated: true)
+    }
+    
+    func goBack() {
+        self.navigationController?.popViewController(animated: true)
     }
 
     override func didReceiveMemoryWarning() {
