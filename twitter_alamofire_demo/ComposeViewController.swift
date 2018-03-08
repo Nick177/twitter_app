@@ -14,15 +14,18 @@ protocol ComposeViewControllerDelegate: class {
     func did(post: Tweet)
 }
 
-class ComposeViewController: UIViewController {
+class ComposeViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var profileImageView: UIImageView!
 
-    @IBOutlet weak var tweetTextField: UITextField!
+    @IBOutlet weak var characterCountLabel: UILabel!
+    @IBOutlet weak var tweetTextField: UITextView!
     @IBOutlet weak var tweetBtn: UIButton!
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     
     weak var delegate: ComposeViewControllerDelegate?
+    
+    let characterLimit = 140
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +35,13 @@ class ComposeViewController: UIViewController {
         profileImageView.af_setImage(withURL: url!)
         nameLabel.text = user.name
         screenNameLabel.text = user.screenName!
+        tweetTextField.delegate = self
+        tweetTextField.isEditable = true
+        tweetTextField.layer.borderColor = UIColor.black.cgColor
+        tweetTextField.layer.borderWidth = 1.0
+        tweetTextField.layer.cornerRadius = 5.0
         
+        characterCountLabel.text = "\(characterLimit)"
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,6 +60,15 @@ class ComposeViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        let newText = NSString(string: tweetTextField.text!).replacingCharacters(in: range, with: text)
+        
+        characterCountLabel.text = "\(characterLimit - newText.characters.count)"
+        
+        return newText.characters.count < characterLimit
     }
 
 }
