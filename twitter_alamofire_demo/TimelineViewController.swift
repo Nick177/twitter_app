@@ -110,11 +110,9 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
             let profileVC = segue.destination as! ProfileViewController
             profileVC.user = tweet.user
         } else if segue.identifier == "timelineToComposeSegue" {
-            print("in here")
             let composeVC = segue.destination as! ComposeViewController
             composeVC.delegate = self
         } else {
-            print("not anywhere")
         }
 
     }

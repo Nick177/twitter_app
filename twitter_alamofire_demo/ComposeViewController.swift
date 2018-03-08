@@ -41,7 +41,6 @@ class ComposeViewController: UIViewController {
     }
     
     @IBAction func didTapPost(_ sender: Any) {
-        print("hello")
         if tweetTextField.text != nil {
             APIManager.shared.composeTweet(with: tweetTextField.text!) { (tweet, error) in
                 if let error = error {
