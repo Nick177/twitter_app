@@ -142,9 +142,23 @@ class DetailsViewController: UIViewController, ReplyViewControllerDelegate {
     
 
     func refreshData() {
+        
+        let attrs = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: retweetCountLabel.font.pointSize)]
+        let attributedString = NSMutableAttributedString(string: String(describing: tweet.retweetCount) + TweetConstants.space, attributes:attrs)
+        attributedString.append(NSMutableAttributedString(string: TweetConstants.retweets_label))
+        
         retweetCountLabel.text = String(describing: tweet.retweetCount) + " " + TweetConstants.retweets_label
+        retweetCountLabel.attributedText = attributedString
+        
+        
+        
         if tweet.favoriteCount != nil {
-            favoriteCountLabel.text = String(describing: tweet.favoriteCount!) + " " + TweetConstants.favorite_label
+            let attrs = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: favoriteCountLabel.font.pointSize)]
+            let attributedString = NSMutableAttributedString(string: String(describing: tweet.favoriteCount!) + TweetConstants.space, attributes:attrs)
+            attributedString.append(NSMutableAttributedString(string: TweetConstants.favorite_label))
+            
+            favoriteCountLabel.text = String(describing: tweet.favoriteCount) + " " + TweetConstants.favorite_label
+            favoriteCountLabel.attributedText = attributedString
         }
         
         if tweet.favorited! {
