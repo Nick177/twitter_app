@@ -235,9 +235,9 @@ class APIManager: SessionManager {
     
     // Reply to tweet
     
-    func composeReply(with text: String, recipient_id: String, completion: @escaping (Tweet?, Error?) -> ()) {
+    func composeReply(with text: String, status_id: Int64, completion: @escaping (Tweet?, Error?) -> ()) {
         let urlString = "https://api.twitter.com/1.1/statuses/update.json"
-        let parameters = ["status": text, "in_reply_to_status_id": recipient_id]
+        let parameters = ["status": text, "in_reply_to_status_id": status_id] as [String : Any]
         postTweet(urlString: urlString, parameters: parameters, completion: completion)
     }
     

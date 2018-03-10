@@ -18,7 +18,7 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var tweetTextField: UITextView!
     
-    var recipientScreenName: String?
+    var tweet: Tweet!
     let characterLimit = 140
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,12 +27,13 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
         //tweetBtn.layer.cornerRadius = 10
         let url = URL(string: user.profileImgURL!)
         profileImageView.af_setImage(withURL: url!)
-        screenNameLabel.text = recipientScreenName
         tweetTextField.delegate = self
         tweetTextField.isEditable = true
         tweetTextField.layer.borderColor = UIColor.black.cgColor
         tweetTextField.layer.borderWidth = 1.0
         tweetTextField.layer.cornerRadius = 5.0
+        
+        screenNameLabel.text = tweet.user.screenName
         
         let attrs = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: screenNameLabel.font.pointSize)]
         let attributedString = NSMutableAttributedString(string: "Replying to ")
@@ -62,30 +63,9 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
         btnProfile.layer.masksToBounds = true
         
         let replyBarButtonItem = UIBarButtonItem(customView: btnProfile)
+        replyBarButtonItem.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(reply)))
         
         self.navigationItem.setRightBarButton(replyBarButtonItem, animated: false)
-    }
-    
-    func hexStringToUIColor (hex:String) -> UIColor {
-        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-        
-        if (cString.hasPrefix("#")) {
-            cString.remove(at: cString.startIndex)
-        }
-        
-        if ((cString.characters.count) != 6) {
-            return UIColor.gray
-        }
-        
-        var rgbValue:UInt32 = 0
-        Scanner(string: cString).scanHexInt32(&rgbValue)
-        
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
     }
     
     func goBack() {
@@ -93,7 +73,17 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
     }
     
     func reply() {
-        
+        if tweetTextField.text != nil {
+            let text = tweetTextField.text + " " + tweet.user.screenName!
+            APIManager.shared.composeReply(with: text, status_id: tweet.id) { (tweet, error) in
+                if let error = error {
+                    print("Error replying to Tweet: \(error.localizedDescription)")
+                } else if let tweet = tweet {
+                    self.delegate?.did(post: tweet)
+                    print("Reply Tweet Success!")
+                }
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

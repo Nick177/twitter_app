@@ -184,7 +184,7 @@ class DetailsViewController: UIViewController, ReplyViewControllerDelegate {
         } else if segue.identifier == "detailToReplySegue" {
             let vc = sender as! DetailsViewController
             let replyVC = segue.destination as! ReplyViewController
-            replyVC.recipientScreenName = tweet.user.screenName
+            replyVC.tweet = vc.tweet
             replyVC.delegate = self
         }
     }
