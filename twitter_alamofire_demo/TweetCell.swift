@@ -170,9 +170,8 @@ class TweetCell: UITableViewCell {
         } else if (diff < 86400) {
             return "\(diff / 60 / 60)h"
         } else if (diff < 604800) {
-            return "\(diff / 60 / 60 / 60)d"
+            return "\(diff / 60 / 60 / 24)d"
         } else {
-            
             // Convert Date to String
             let createdString = formatter.string(from: createdDate)
             return createdString
