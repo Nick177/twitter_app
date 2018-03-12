@@ -28,8 +28,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
     
+    @IBOutlet weak var segmentControl: UISegmentedControl!
     var user: User!
     var tweets: [Tweet] = []
+    var likedTweets: [Tweet] = []
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -71,7 +73,19 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         tableView.delegate = self
         tableView.dataSource = self
-        fetchUserTimeline()
+        
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            fetchUserTimeline()
+            break
+        case 1:
+            fetchLikedTweets()
+            break
+        default:
+            print("defualt")
+            break
+        }
+        //fetchUserTimeline()
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,14 +106,44 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         })
     }
     
+    func fetchLikedTweets() {
+        print("fetching")
+        APIManager.shared.getLikedTweets(completion:{ (tweets, error) in
+            if let tweets = tweets {
+                self.likedTweets = tweets
+                self.tableView.reloadData()
+            } else if let error = error {
+                print("Error getting liked tweets: " + error.localizedDescription)
+            }
+        })
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tweets.count
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            return tweets.count
+            break
+        case 1:
+            return likedTweets.count
+            break
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         
-        cell.tweet = tweets[indexPath.row]
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            cell.tweet = tweets[indexPath.row]
+            break
+        case 1:
+            cell.tweet = likedTweets[indexPath.row]
+            break
+        default:
+            print("Error")
+        }
         
         return cell
     }
@@ -119,5 +163,24 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
     }
+    
+    @IBAction func segmentControlChange(_ sender: Any) {
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            tableView.reloadData()
+            break
+        case 1:
+            if likedTweets.isEmpty
+            {
+                fetchLikedTweets()
+            }
+            tableView.reloadData()
+            break
+        default:
+            print("error")
+        }
+    }
+    
+    
 
 }

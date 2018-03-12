@@ -16,15 +16,17 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
     weak var delegate: ReplyViewControllerDelegate?
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var screenNameLabel: UILabel!
+    
     @IBOutlet weak var tweetTextField: UITextView!
     
     var tweet: Tweet!
     let characterLimit = 140
+    var characterCountLabel: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let user = User.current!
-        //tweetBtn.layer.cornerRadius = 10
         let url = URL(string: user.profileImgURL!)
         profileImageView.af_setImage(withURL: url!)
         tweetTextField.delegate = self
@@ -41,21 +43,17 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
         
         screenNameLabel.text = "Replying to " + screenNameLabel.text!
         screenNameLabel.attributedText = attributedString
-        //characterCountLabel.text = "\(characterLimit)"
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         let barButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "close-icon"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(goBack))
-        //let barButtonItem2 = UIBarButtonItem(image: #imageLiteral(resourceName: "close-icon"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(reply))
-        //let replyButtonItem = UIBarButtonItem(title: "Reply", style: .plain, target: self, action: #selector(reply))
-        //replyButtonItem
         self.navigationItem.setLeftBarButton(barButtonItem, animated: true)
-        //self.navigationItem.setRightBarButton(barButtonItem2, animated: true)
         
         let b = UIButton(type: UIButtonType.system)
         let color = b.titleColor(for: .normal)
         
-        let btnProfile = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 25))
+        let btnProfile = UIButton(frame: CGRect(x: 0, y: 0, width: 65, height: 30))
         btnProfile.setTitle("Reply", for: .normal)
         btnProfile.backgroundColor = color
         btnProfile.setTitleColor(UIColor.white, for: .normal)
@@ -65,7 +63,10 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
         let replyBarButtonItem = UIBarButtonItem(customView: btnProfile)
         replyBarButtonItem.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(reply)))
         
-        self.navigationItem.setRightBarButton(replyBarButtonItem, animated: false)
+        characterCountLabel = UIBarButtonItem(title: "\(characterLimit)", style: .plain, target: nil, action: nil)
+        
+        self.navigationItem.setRightBarButtonItems([replyBarButtonItem, characterCountLabel], animated: true)
+        //self.navigationItem.setRightBarButton(replyBarButtonItem, animated: false)
     }
     
     func goBack() {
@@ -95,7 +96,7 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
         
         let newText = NSString(string: tweetTextField.text!).replacingCharacters(in: range, with: text)
         
-        //characterCountLabel.text = "\(characterLimit - newText.characters.count)"
+        characterCountLabel.title = "\(characterLimit - newText.characters.count)"
         
         return newText.characters.count < characterLimit
     }
